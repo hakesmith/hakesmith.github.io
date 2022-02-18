@@ -18,6 +18,7 @@
 		}
 		.board{
 			height: 100vh;
+			background-color: rgb(0, 255, 136)
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -47,10 +48,12 @@
 			box.on('click', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
-				box.css("left", newPositionX);
+			function moveBoxTo(newPositionX)  {
+				box.css("left",  newPositionX);
 			}
-
+			function update() {
+				moveBoxTo(100);
+			}	
 			// changes the text displayed on the Box
 			function changeBoxText(newText) {
 				box.text(newText);
@@ -62,7 +65,9 @@
 			
 			// TODO 2 - Variable declarations 
 			
-
+			var positionX = 0
+			var points = 0
+			var speed = 10
 			
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -70,18 +75,27 @@
 			turn it around! 
 			*/
 			function update() {
-				
-
-			};
-
+				/* Your code to Increase positionX by 10 HERE*/
+				positionX = positionX + speed
+				moveBoxTo(positionX);
+				if (positionX > boardWidth) {
+					speed = -speed; 
+				} 
+				else if(positionX < 0) {
+					speed = -speed; 
+				}
+			}
+			
 			/* 
 			This Function will be called each time the box is clicked. Each time it is called,
 			it should increase the points total, increase the speed, and move the box to
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-				
-
+				positionX = 0;
+				points = points + 1
+				speed = speed + 3
+				changeBoxText(points);
 
 			};
 		})();
